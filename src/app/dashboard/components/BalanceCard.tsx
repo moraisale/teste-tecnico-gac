@@ -1,4 +1,3 @@
-// src/app/dashboard/components/BalanceCard.tsx
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { prisma } from '@/lib/prisma'
@@ -28,33 +27,44 @@ export default async function BalanceCard() {
   }).format(balance)
 
   return (
-    <div className={`p-6 rounded-xl shadow-sm ${
-      isNegative 
-        ? 'bg-gradient-to-br from-red-50 to-red-100 text-red-800'
-        : 'bg-gradient-to-br from-green-50 to-green-100 text-green-800'
-    }`}>
+    <div
+      className={`rounded-2xl p-6 shadow-md border ${
+        isNegative
+          ? 'bg-red-50 border-red-200 text-red-800'
+          : 'bg-green-50 border-green-200 text-green-800'
+      }`}
+    >
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-sm font-medium">Saldo Atual</h2>
-          <p className="text-3xl font-bold mt-2">
-            {formattedBalance}
-          </p>
+          <h2 className="text-xs uppercase tracking-wide font-semibold">
+            Saldo Atual
+          </h2>
+          <p className="text-4xl font-bold mt-1">{formattedBalance}</p>
         </div>
-        <div className={`p-3 rounded-lg ${
-          isNegative ? 'bg-red-100' : 'bg-green-100'
-        }`}>
-          {/* {isNegative ? (
-            <ArrowTrendingDownIcon className="w-8 h-8" />
+
+        <div
+          className={`w-12 h-12 flex items-center justify-center rounded-xl ${
+            isNegative ? 'bg-red-100' : 'bg-green-100'
+          }`}
+        >
+          {/* 
+          Ícone opcional:
+          {isNegative ? (
+            <ArrowTrendingDownIcon className="w-6 h-6" />
           ) : (
-            <ArrowTrendingUpIcon className="w-8 h-8" />
-          )} */}
+            <ArrowTrendingUpIcon className="w-6 h-6" />
+          )} 
+          */}
+          <span className="text-xl">
+            {isNegative ? '↓' : '↑'}
+          </span>
         </div>
       </div>
-      
+
       {isNegative && (
-        <div className="mt-4 text-sm bg-red-50 p-2 rounded-md">
+        <p className="mt-4 text-sm bg-red-100/70 p-3 rounded-lg">
           Seu saldo está negativo. Deposite valores para regularizar.
-        </div>
+        </p>
       )}
     </div>
   )

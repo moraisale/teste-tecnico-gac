@@ -1,21 +1,29 @@
-import BalanceCard from "./components/BalanceCard";
-import DepositForm from "./components/DepositForm";
+import Sidebar from './components/Sidebar'
+import BalanceCard from './components/BalanceCard'
+import DepositForm from './components/DepositForm'
+import TransactionList from './components/TransactionsList'
+import TransferForm from './components/TransferForm'
 
-// /src/app/dashboard/page.tsx
 export default function Dashboard() {
   return (
-    <div className="grid md:grid-cols-3 gap-6 p-6 bg-gray-100 h-screen ">
-      <div className="space-y-6">
-        <BalanceCard />
-        <div className="space-y-4">
-          <DepositForm />
-          {/* <TransferForm /> */}
+    <main className="min-h-screen bg-gray-100 flex">
+      <Sidebar />
+
+      <div className="flex-1 p-4 md:py-6 md:pl-18 md:pr-10 w-full mx-auto ml-0 md:ml-64">
+        <div className="grid gap-6 md:grid-cols-3">
+          <section className="space-y-6 md:col-span-1">
+            <BalanceCard />
+            <div className="space-y-4">
+              <DepositForm />
+              <TransferForm />
+            </div>
+          </section>
+
+          <section className="md:col-span-2">
+            <TransactionList />
+          </section>
         </div>
       </div>
-
-      <div className="md:col-span-2">
-        {/* <TransactionList /> */}
-      </div>
-    </div>
+    </main>
   )
 }
