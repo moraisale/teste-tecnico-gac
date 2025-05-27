@@ -47,7 +47,7 @@ export default function TransferForm() {
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm max-w-md mx-auto">
+    <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm w-full mx-auto">
       <h2 className="text-xl font-bold text-[#002948] mb-6">Transferência</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

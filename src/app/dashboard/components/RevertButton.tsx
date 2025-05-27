@@ -63,7 +63,7 @@ export function RevertButton({
               <button
                 onClick={() => setIsOpen(false)}
                 disabled={isLoading}
-                className="px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed text-black"
               >
                 Cancelar
               </button>

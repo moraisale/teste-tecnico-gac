@@ -55,7 +55,7 @@ export default function DepositForm() {
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm max-w-md mx-auto">
+    <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm mx-auto w-full">
       <h2 className="text-xl font-bold text-[#002948] mb-6">Depósito</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -80,10 +80,6 @@ export default function DepositForm() {
 
         {error && (
           <p className="text-sm text-red-600 bg-red-100 px-3 py-2 rounded-md">{error}</p>
-        )}
-
-        {success && (
-          <p className="text-sm text-[#002948] bg-[#F2C363]/20 px-3 py-2 rounded-md">{success}</p>
         )}
 
         <button
