@@ -17,9 +17,9 @@ services:
   db:
     image: postgres:15
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: wallet
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Alexandre@123
+      POSTGRES_DB: carteira-digital
     ports:
       - "5432:5432"
     volumes:
