@@ -1,9 +1,9 @@
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { prisma } from '@/lib/prisma'
 import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { RevertButton } from './RevertButton';
+import { authOptions } from '@/lib/auth';
 
 export default async function TransactionList() {
   const session = await getServerSession(authOptions)

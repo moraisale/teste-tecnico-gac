@@ -3,8 +3,6 @@
 import { useRouter } from 'next/navigation'
 import { FaSignOutAlt, FaChartPie, FaSlidersH, FaFileAlt, FaCog, FaHome } from 'react-icons/fa'
 import { useState } from 'react'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { signOut, useSession } from 'next-auth/react'
 
 export default function Sidebar() {
