@@ -6,7 +6,6 @@ export const mainClient = axios.create({
   withCredentials: false,
 });
 
-// Interceptor de resposta (tratamento global de erros)
 mainClient.interceptors.response.use(
   (response) => response,
   (error) => {

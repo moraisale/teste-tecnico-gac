@@ -30,7 +30,6 @@ export default function LoginPage() {
   })
 
   const onSubmit = async (data: LoginFormData) => {
-    console.log(data)
     try {
       const result = await signIn('credentials', {
         email: data.email,
@@ -38,9 +37,7 @@ export default function LoginPage() {
         redirect: false
       })
 
-
       if (result?.error) {
-        // Erros específicos do NextAuth
         if (result.error === 'CredentialsSignin') {
           setError('password', {
             type: 'manual',
@@ -52,8 +49,7 @@ export default function LoginPage() {
         return
       }
 
-      // Login bem-sucedido
-      router.push('/')
+      router.push('/dashboard')
     } catch (error) {
       toast.error('Ocorreu um erro inesperado')
     }
@@ -115,26 +111,6 @@ export default function LoginPage() {
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 sm:text-sm text-black"
               />
               {errors.password && <p className="text-sm text-red-600">{errors.password.message}</p>}
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-[#004B88] focus:ring-[#004B88] border-gray-300 rounded"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                Lembrar de mim
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <Link href="/forgot-password" className="font-medium text-[#004B88] hover:text-[#004B88]">
-                Esqueceu sua senha?
-              </Link>
             </div>
           </div>
 

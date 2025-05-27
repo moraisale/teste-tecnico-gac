@@ -2,6 +2,7 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
 import { prisma } from '@/lib/prisma'
+import { JWT } from 'next-auth/jwt'
 
 export const authOptions = {
   providers: [
@@ -16,13 +17,9 @@ export const authOptions = {
           throw new Error('Email e senha são obrigatórios')
         }
 
-
         const user = await prisma.user.findUnique({
           where: { email: credentials.email }
         })
-
-        console.log('aaa', user)
-        console.log('bbb', credentials.password)
 
         if (!user) {
           throw new Error('Usuário não encontrado')
@@ -38,7 +35,7 @@ export const authOptions = {
         }
 
         return {
-          id: user.id,
+          id: user.id, 
           email: user.email,
           name: user.name
         }
@@ -46,9 +43,27 @@ export const authOptions = {
     })
   ],
   pages: {
-    signIn: '/auth/login'
+    signIn: '/login'
   },
-  secret: process.env.NEXTAUTH_SECRET
+  secret: process.env.NEXTAUTH_SECRET,
+
+  callbacks: {
+    async jwt({ token, user }: { token: JWT, user?: any }) {
+      if (user) {
+        token.id = user.id
+        token.email = user.email
+        token.name = user.name
+      }
+      return token
+    },
+
+    async session({ session, token }: { session: any, token: JWT }) {
+      if (token?.id) {
+        session.user.id = token.id
+      }
+      return session
+    }
+  }
 }
 
 const handler = NextAuth(authOptions)

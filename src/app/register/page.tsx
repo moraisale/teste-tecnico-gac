@@ -6,6 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { toast } from 'react-hot-toast'
 import Link from 'next/link'
+import { mainClient } from '@/utils/client'
+import { MAIN_SERVICE_ROUTES } from '@/helpers/api'
 
 const registerSchema = z.object({
   name: z.string()
@@ -38,22 +40,12 @@ export default function RegisterPage() {
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          password: data.password
-        }),
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || 'Erro no cadastro')
-      }
+      const { name, email, password } = data
+      const response = await mainClient.post(MAIN_SERVICE_ROUTES.register, {
+        name: name,
+        email: email,
+        password: password,
+      });
 
       toast.success('Cadastro realizado com sucesso!')
       router.push('/login')
@@ -160,7 +152,7 @@ export default function RegisterPage() {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Já possui uma conta?{' '}
-            <Link href="/auth/login" className="font-medium text-[#004B88] cursor-pointer hover:text-[#004B88]/80 transition duration-200">
+            <Link href="/login" className="font-medium text-[#004B88] cursor-pointer hover:text-[#004B88]/80 transition duration-200">
               Faça login
             </Link>
           </p>
