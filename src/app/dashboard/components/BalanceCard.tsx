@@ -47,14 +47,6 @@ export default async function BalanceCard() {
             isNegative ? 'bg-red-100' : 'bg-green-100'
           }`}
         >
-          {/* 
-          Ícone opcional:
-          {isNegative ? (
-            <ArrowTrendingDownIcon className="w-6 h-6" />
-          ) : (
-            <ArrowTrendingUpIcon className="w-6 h-6" />
-          )} 
-          */}
           <span className="text-xl">
             {isNegative ? '↓' : '↑'}
           </span>

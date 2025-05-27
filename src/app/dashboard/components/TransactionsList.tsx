@@ -5,8 +5,6 @@ import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { RevertButton } from './RevertButton';
 
-
-
 export default async function TransactionList() {
   const session = await getServerSession(authOptions)
   

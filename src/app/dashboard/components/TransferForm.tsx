@@ -21,8 +21,6 @@ type TransferFormData = z.infer<typeof transferSchema>
 
 export default function TransferForm() {
   const router = useRouter()
-  const [success, setSuccess] = useState('')
-  const [error, setError] = useState('')
 
   const {
     register,
@@ -36,19 +34,15 @@ export default function TransferForm() {
   })
 
   const onSubmit = async (values: TransferFormData) => {
-    setError('')
-    setSuccess('')
     try {
       await transfer(values.toEmail, values.amount)
       const successMsg = `Transferência de R$${values.amount.toFixed(2)} realizada com sucesso!`
       toast.success(successMsg)
-      setSuccess(successMsg)
       reset()
       router.refresh()
     } catch (err: any) {
       const errorMsg = err?.message || 'Erro ao realizar transferência'
       toast.error(errorMsg)
-      setError(errorMsg)
     }
   }
 

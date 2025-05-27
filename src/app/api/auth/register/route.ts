@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
 import { NextResponse } from 'next/server'
-import toast from 'react-hot-toast'
 
 export async function POST(request: Request) {
   try {
