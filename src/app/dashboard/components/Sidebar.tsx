@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { FaSignOutAlt, FaChartPie, FaSlidersH, FaFileAlt, FaCog, FaHome } from 'react-icons/fa'
+import { FaSignOutAlt, FaSlidersH, FaCog, FaHome } from 'react-icons/fa'
 import { useState } from 'react'
 import { signOut, useSession } from 'next-auth/react'
 
@@ -12,10 +12,7 @@ export default function Sidebar() {
 
   const handleLogout = async () => {
     try {
-      await signOut({ 
-        redirect: false,
-        callbackUrl: '/login'
-      })
+      await signOut({ redirect: false, callbackUrl: '/login' })
       router.push('/login')
       router.refresh()
     } catch (error) {
@@ -30,9 +27,9 @@ export default function Sidebar() {
   ]
 
   return (
-    <aside className="hidden md:flex flex-col fixed top-0 left-0 h-full w-72 bg-gradient-to-b from-[#002948] to-[#003d6f] text-white shadow-lg font-inter">
-      <div className="flex items-center justify-center h-20 border-b border-[#F2C363]/30 font-extrabold text-2xl tracking-wide select-none">
-        {session?.user.name}
+    <aside className="hidden lg:flex flex-col fixed top-0 left-0 h-full w-72 bg-gradient-to-b from-[#002948] to-[#003d6f] text-white shadow-lg font-inter z-40">
+      <div className="flex items-center justify-center h-20 border-b border-[#F2C363]/30 font-extrabold text-2xl tracking-wide select-none px-4 text-center">
+        {session?.user.name || 'Minha Conta'}
       </div>
 
       <nav className="flex-1 px-6 py-8 space-y-3">

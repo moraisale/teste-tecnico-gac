@@ -39,7 +39,7 @@ export default async function TransactionList() {
   }
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm">
+    <div className="w-full max-w-full bg-white p-6 rounded-xl shadow-sm">
       <h2 className="text-lg text-[#002948] font-semibold mb-4">Histórico de Transações</h2>
       
       {transactions.length === 0 ? (

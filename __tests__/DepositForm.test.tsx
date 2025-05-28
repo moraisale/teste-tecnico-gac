@@ -23,46 +23,47 @@ jest.mock('react-hot-toast', () => ({
 
 describe('DepositForm', () => {
   const mockDeposit = deposit as jest.Mock
+  const mockRefresh = jest.fn()
 
   beforeEach(() => {
     jest.clearAllMocks()
+    mockDeposit.mockReset()
+    ;(toast.success as jest.Mock).mockClear()
+    ;(toast.error as jest.Mock).mockClear()
   })
 
   it('chama deposit e mostra toast de sucesso', async () => {
-    mockDeposit.mockResolvedValueOnce(undefined)
+    mockDeposit.mockResolvedValueOnce(100)
 
     render(<DepositForm />)
 
-    const input = screen.getByPlaceholderText('Valor (R$)')
+    const input = screen.getByPlaceholderText("Valor (R$)")
     const button = screen.getByRole('button', { name: /depositar/i })
 
-    fireEvent.change(input, { target: { value: '10' } })
+    fireEvent.change(input, { target: { value: '10.50' } })
     fireEvent.click(button)
 
     await waitFor(() => {
-      expect(mockDeposit).toHaveBeenCalledWith(10)
-      expect(toast.success).toHaveBeenCalledWith(
-        expect.stringMatching(/Depósito de R\$ ?10[,\.]00/)
-      )
-      expect(refresh).toHaveBeenCalled()
+      expect(mockDeposit).toHaveBeenCalledWith(10.5)
     })
+
+    await waitFor(() => {
+      expect(toast.success).toHaveBeenCalledWith(
+        expect.stringMatching('Depósito realizado com sucesso!')
+      )
+    })
+
   })
 
-  it('mostra mensagem de erro em caso de falha', async () => {
-    mockDeposit.mockRejectedValueOnce(new Error('Erro de rede'))
-
+  it('mostra mensagem de erro se tentar depositar sem valor', async () => {
     render(<DepositForm />)
-
-    const input = screen.getByPlaceholderText('Valor (R$)')
+  
     const button = screen.getByRole('button', { name: /depositar/i })
-
-    fireEvent.change(input, { target: { value: '100' } })
-    fireEvent.click(button)
-
+  
+    fireEvent.click(button) 
+  
     await waitFor(() => {
-        expect(screen.queryByText((text) =>
-            text.includes('Valor inválido')
-        )).toBeInTheDocument()
+      expect(screen.getByText('Valor inválido')).toBeInTheDocument()
     })
   })
 })

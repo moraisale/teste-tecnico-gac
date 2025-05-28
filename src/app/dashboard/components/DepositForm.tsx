@@ -31,15 +31,10 @@ export default function DepositForm() {
     defaultValues: { amount: undefined },
   })
 
-  const formatter = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  })
-
   const onSubmit = async (values: DepositFormData) => {
     try {
       await deposit(values.amount)
-      toast.success(`Depósito de ${formatter.format(values.amount)} realizado com sucesso!`)
+      toast.success('Depósito realizado com sucesso!')
       reset()
       router.refresh()
     } catch (err: any) {
@@ -48,7 +43,7 @@ export default function DepositForm() {
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm mx-auto w-full">
+    <div className="w-full max-w-full bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
       <h2 className="text-xl font-bold text-[#002948] mb-6">Depósito</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
