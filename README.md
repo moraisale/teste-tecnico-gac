@@ -1,4 +1,4 @@
-# 💳 Carteira Digital - Desafio para front-end Grupo Adriano Cobuccio
+# Carteira Digital - Desafio para front-end Grupo Adriano Cobuccio
 
 Uma carteira digital com autenticação, depósitos, transferências e reversão de operações, desenvolvida com Next.js e TypeScript.
 
@@ -33,7 +33,7 @@ Uma carteira digital com autenticação, depósitos, transferências e reversão
 
 1. **Clone o repositório**
 ```bash
-git clone [URL_DO_REPOSITÓRIO]
+git clone https://github.com/moraisale/teste-tecnico-gac.git
 cd wallet-app
 ```
 
@@ -62,7 +62,7 @@ docker-compose exec app npx prisma db seed
 
 A aplicação estará disponível em: [http://localhost:3000](http://localhost:3000)
 
-### Credenciais para Teste (ou crie uma conta em [http://localhost:3000/register])
+### Credenciais para Teste (ou crie uma conta em [http://localhost:3000/register](http://localhost:3000/register))
 
 | Campo | Valor |
 |-------|-------|
