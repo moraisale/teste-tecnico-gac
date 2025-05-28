@@ -1,8 +1,7 @@
 # Carteira Digital - Desafio para front-end Grupo Adriano Cobuccio
 
 Uma carteira digital com autenticação, depósitos, transferências e reversão de operações, desenvolvida com Next.js e TypeScript.
-
-
+Conteinerização feita com Docker e teste unitários/integração com Jest e React Testing Library
 
 ## Funcionalidades Principais
 
@@ -105,7 +104,7 @@ NEXTAUTH_URL="http://localhost:3000"
 NEXT_PUBLIC_API_BASE_URL="http://localhost:3000"
 ```
 
-## 🧪 Testando
+## Testes
 
 ```bash
 # Executar testes unitários
@@ -115,7 +114,7 @@ npm test
 npm run test:coverage
 ```
 
-## 🛠️ Comandos Úteis
+## Comandos Úteis
 
 | Comando | Descrição |
 |---------|-----------|
