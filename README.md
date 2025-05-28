@@ -34,7 +34,7 @@ Uma carteira digital com autenticação, depósitos, transferências e reversão
 1. **Clone o repositório**
 ```bash
 git clone https://github.com/moraisale/teste-tecnico-gac.git
-cd wallet-app
+cd teste-tecnico-gac
 ```
 
 2. **Configure as variáveis de ambiente**
