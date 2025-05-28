@@ -20,7 +20,7 @@ export async function transfer(toEmail: string, amount: number) {
     throw new Error('Não pode transferir para si mesmo')
   }
 
-  return await prisma.$transaction(async (tx) => {
+  return await prisma.$transaction(async (tx: any) => {
     // 1. Verifica saldo do remetente
     const fromUser = await tx.user.findUnique({
       where: { id: session.user.id },

@@ -46,7 +46,7 @@ export default async function TransactionList() {
         <p className="text-gray-500">Nenhuma transação encontrada</p>
       ) : (
         <ul className="space-y-4">
-          {transactions.map((transaction) => (
+          {transactions.map((transaction: any) => (
             <TransactionItem 
               key={transaction.id}
               transaction={transaction}

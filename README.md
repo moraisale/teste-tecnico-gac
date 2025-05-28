@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💳 Carteira Digital - Desafio para front-end Grupo Adriano Cobuccio
 
-## Getting Started
+Uma carteira digital com autenticação, depósitos, transferências e reversão de operações, desenvolvida com Next.js e TypeScript.
 
-First, run the development server:
 
+
+## Funcionalidades Principais
+
+- **Autenticação Segura**
+  - Cadastro e login com Next-Auth
+  - Proteção de rotas com middleware
+  - Session management
+
+- **Operações Financeiras**
+  - Depósito com validação em tempo real
+  - Transferência entre usuários
+  - Reversão de transações
+  - Histórico de operações
+
+- **Validações**
+  - Formulários com Zod e React Hook Form
+  - Validações no cliente e servidor
+  - Tipagem forte com TypeScript
+
+## Como Executar
+
+### Pré-requisitos
+- Docker 20.10+
+- Docker Compose 2.17+
+- Node.js 18+
+
+### Passo a Passo
+
+1. **Clone o repositório**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [URL_DO_REPOSITÓRIO]
+cd wallet-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Configure as variáveis de ambiente**
+```bash
+cp .env.example .env
+```
+Edite o `.env` com as credenciais
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Instale as dependências e gere client Prisma**
+```bash
+npm install
+npx prisma generate
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Inicie os containers**
+```bash
+docker-compose up --build
+```
 
-## Learn More
+5. **Execute as migrations e seed**
+```bash
+docker-compose exec app npx prisma migrate deploy
+docker-compose exec app npx prisma db seed
+```
 
-To learn more about Next.js, take a look at the following resources:
+A aplicação estará disponível em: [http://localhost:3000](http://localhost:3000)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Credenciais para Teste (ou crie uma conta em [http://localhost:3000/register])
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Campo | Valor |
+|-------|-------|
+| Email | admin@test.com |
+| Senha | admin123 |
+| Saldo | R$ 10.000,00 |
 
-## Deploy on Vercel
+## Arquitetura
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Principais Tecnologias
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### Front-end
+
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS
+
+#### Back-end
+
+- Next.js API Routes
+- Prisma ORM
+- PostgreSQL
+- Next-Auth
+
+### Padrões Adotados
+
+- SOLID
+  - Single Responsibility Principle
+  - Open/Closed Principle
+- Server Actions para as operações financeiras
+- Componentização atômica
+
+## ⚙️ Variáveis de Ambiente
+
+```
+DATABASE_URL=postgresql://postgres:Alexandre@123@localhost:5432/carteira-digital
+NEXTAUTH_SECRET=062b7e57104027931193fed14b8bdd7c257414b42d2f959f05b707dc5e5428f2
+JWT_SECRET=7d5b0ebe3111f47166ea6d5f235f763eed9db7ec550e5c3456dd530005b7c07f
+NEXTAUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_API_BASE_URL="http://localhost:3000"
+```
+
+## 🧪 Testando
+
+```bash
+# Executar testes unitários
+npm test
+
+# Verificar cobertura
+npm run test:coverage
+```
+
+## 🛠️ Comandos Úteis
+
+| Comando | Descrição |
+|---------|-----------|
+| docker-compose logs -f app | Ver logs da aplicação |
+| docker-compose exec db psql | Acessar PostgreSQL |
+| npx prisma studio | Abrir interface do banco |
+
+## 📄 Licença
+
+Este projeto está licenciado sob a MIT License.

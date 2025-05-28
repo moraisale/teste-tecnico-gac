@@ -12,7 +12,7 @@ export async function revertTransaction(transactionId: string) {
     throw new Error('Não autorizado')
   }
 
-  return await prisma.$transaction(async (tx) => {
+  return await prisma.$transaction(async (tx: any) => {
     // 1. Busca a transação original
     const originalTransaction = await tx.transaction.findUnique({
       where: { id: transactionId },
