@@ -47,6 +47,8 @@ export default function RegisterPage() {
         password: password,
       });
 
+      if (!response) toast.error('Erro ao realizar cadastro!')
+
       toast.success('Cadastro realizado com sucesso!')
       router.push('/login')
     } catch (error: any) {

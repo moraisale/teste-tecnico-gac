@@ -6,7 +6,6 @@ import { z } from 'zod'
 import { toast } from 'react-hot-toast'
 import { deposit } from '../actions/deposit'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 import { FiDollarSign } from 'react-icons/fi'
 
 const depositSchema = z.object({
@@ -20,37 +19,31 @@ type DepositFormData = z.infer<typeof depositSchema>
 
 export default function DepositForm() {
   const router = useRouter()
-  const [success, setSuccess] = useState('')
-  const [error, setError] = useState('')
 
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<DepositFormData>({
     resolver: zodResolver(depositSchema),
-    defaultValues: { amount: 0 },
+    defaultValues: { amount: undefined },
+  })
+
+  const formatter = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
   })
 
   const onSubmit = async (values: DepositFormData) => {
-    setError('')
-    setSuccess('')
-
     try {
       await deposit(values.amount)
-
-      const successMsg = `Depósito de R$${values.amount.toFixed(2)} realizado com sucesso!`
-      toast.success(successMsg)
-      setSuccess(successMsg)
-
+      toast.success(`Depósito de ${formatter.format(values.amount)} realizado com sucesso!`)
       reset()
       router.refresh()
     } catch (err: any) {
-      const errorMsg = err?.message || 'Erro ao realizar depósito'
-      toast.error(errorMsg)
-      setError(errorMsg)
+      toast.error(err?.message || 'Erro ao realizar depósito')
     }
   }
 
@@ -70,6 +63,7 @@ export default function DepositForm() {
             {...register('amount', {
               setValueAs: (v) => parseFloat(v),
             })}
+            value={watch('amount') || ''}
             placeholder="Valor (R$)"
             className="w-full pl-10 pr-4 py-2.5 bg-gray-100 text-[#002948] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F2C363]"
           />
@@ -78,14 +72,10 @@ export default function DepositForm() {
           )}
         </div>
 
-        {error && (
-          <p className="text-sm text-red-600 bg-red-100 px-3 py-2 rounded-md">{error}</p>
-        )}
-
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3 rounded-lg text-white font-semibold bg-[#002948] hover:bg-[#001d35] transition-colors disabled:opacity-70"
+          className="w-full py-3 rounded-lg cursor-pointer text-white font-semibold bg-[#002948] hover:bg-[#001d35] transition-colors disabled:opacity-70"
         >
           {isSubmitting ? (
             <span className="flex items-center justify-center gap-2">
