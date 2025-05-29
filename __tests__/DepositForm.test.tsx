@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { toast } from 'react-hot-toast'
 import { deposit } from '@/app/dashboard/actions/deposit'
-import DepositForm from '@/app/dashboard/components/DepositForm'
+import { DepositForm } from '@/app/dashboard/components/DepositForm'
 
 jest.mock('@/app/dashboard/actions/deposit', () => ({
   deposit: jest.fn(),

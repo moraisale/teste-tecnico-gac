@@ -1,8 +1,8 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import TransferForm from '@/app/dashboard/components/TransferForm'
 import { toast } from 'react-hot-toast'
 import { transfer as mockTransfer } from '@/app/dashboard/actions/transfer'
 import { useRouter } from 'next/navigation'
+import { TransferForm } from '@/app/dashboard/components/TransferForm'
 
 jest.mock('react-hot-toast', () => ({
   toast: {

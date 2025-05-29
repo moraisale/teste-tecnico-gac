@@ -1,8 +1,8 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import RegisterPage from '@/app/register/page'
 import { useRouter } from 'next/navigation'
 import { mainClient } from '@/utils/client'
 import { toast } from 'react-hot-toast'
+import RegisterPage from '@/app/register/page'
 
 // Mocks para simular chamadas 
 jest.mock('next/navigation', () => ({

@@ -1,4 +1,3 @@
-// jest.config.js
 import nextJest from 'next/jest.js'
 
 const createJestConfig = nextJest({
@@ -10,6 +9,8 @@ const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    // Adicione este mapeamento para resolver problemas de URL
+    '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',

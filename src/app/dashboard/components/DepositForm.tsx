@@ -17,7 +17,7 @@ const depositSchema = z.object({
 
 type DepositFormData = z.infer<typeof depositSchema>
 
-export default function DepositForm() {
+export const DepositForm = () => {
   const router = useRouter()
 
   const {
@@ -43,7 +43,7 @@ export default function DepositForm() {
   }
 
   return (
-    <div className="w-full max-w-full bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+    <div className="w-full max-w-full bg-white  rounded-2xl p-6 shadow-lg">
       <h2 className="text-xl font-bold text-[#002948] mb-6">Depósito</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

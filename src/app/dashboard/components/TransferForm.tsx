@@ -19,7 +19,7 @@ const transferSchema = z.object({
 
 type TransferFormData = z.infer<typeof transferSchema>
 
-export default function TransferForm() {
+export const TransferForm = () => {
   const router = useRouter()
 
   const {
@@ -30,7 +30,7 @@ export default function TransferForm() {
     formState: { errors, isSubmitting },
   } = useForm<TransferFormData>({
     resolver: zodResolver(transferSchema),
-    defaultValues: { toEmail: '', amount: 0 },
+    defaultValues: { toEmail: '', amount: undefined },
   })
 
   const onSubmit = async (values: TransferFormData) => {
@@ -40,14 +40,14 @@ export default function TransferForm() {
       toast.success(successMsg)
       reset()
       router.refresh()
-    } catch (err: any) {
-      const errorMsg = err?.message || 'Erro ao realizar transferência'
+    } catch (error: any) {
+      const errorMsg = error?.message || 'Erro ao realizar transferência'
       toast.error(errorMsg)
     }
   }
 
   return (
-    <div className="w-full max-w-full bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+    <div className="w-full max-w-full bg-white rounded-2xl p-6 shadow-lg">
       <h2 className="text-xl font-bold text-[#002948] mb-6">Transferência</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">

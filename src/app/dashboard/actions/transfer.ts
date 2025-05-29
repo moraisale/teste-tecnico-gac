@@ -59,7 +59,6 @@ export async function transfer(toEmail: string, amount: number) {
       }
     })
 
-    // Atualiza a página
     revalidatePath('/dashboard')
 
     return {

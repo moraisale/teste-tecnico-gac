@@ -94,7 +94,7 @@ A aplicação estará disponível em: [http://localhost:3000](http://localhost:3
 - Server Actions para as operações financeiras
 - Componentização atômica
 
-## ⚙️ Variáveis de Ambiente
+## Variáveis de Ambiente
 
 ```
 DATABASE_URL=postgresql://postgres:Alexandre@123@localhost:5432/carteira-digital
@@ -110,10 +110,6 @@ NEXT_PUBLIC_API_BASE_URL="http://localhost:3000"
 # Executar testes unitários
 npm test
 
-# Verificar cobertura
-npm run test:coverage
-```
-
 ## Comandos Úteis
 
 | Comando | Descrição |
@@ -121,7 +117,3 @@ npm run test:coverage
 | docker-compose logs -f app | Ver logs da aplicação |
 | docker-compose exec db psql | Acessar PostgreSQL |
 | npx prisma studio | Abrir interface do banco |
-
-## 📄 Licença
-
-Este projeto está licenciado sob a MIT License.

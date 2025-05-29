@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import LoginPage from '@/app/login/page'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
+import LoginPage from '@/app/login/page'
 
 // Mocks para simular navigation e Auth
 jest.mock('next/navigation', () => ({

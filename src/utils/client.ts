@@ -11,7 +11,7 @@ mainClient.interceptors.response.use(
   (error) => {
     if (error.response) {
       return Promise.reject({
-        message: error.response.data?.error || "Erro desconhecido",
+        message: error.response.data.message || "Erro desconhecido",
         status: error.response.status,
       });
     }

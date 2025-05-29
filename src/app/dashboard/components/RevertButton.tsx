@@ -4,14 +4,9 @@ import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { revertTransaction } from '../actions/revert'
 import { useRouter } from 'next/navigation'
+import { IRevertButtonProps } from '@/types/transactions'
 
-export function RevertButton({ 
-  transactionId,
-  disabled
-}: {
-  transactionId: string
-  disabled?: boolean
-}) {
+export const RevertButton = ({ transactionId, disabled }: IRevertButtonProps) => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -24,14 +19,13 @@ export function RevertButton({
         toast.success('Transação estornada com sucesso!')
         router.refresh()
       } catch (error: any) {
-        toast.error(error.message || 'Erro ao estornar transação')
+        toast.error(error?.message || 'Erro ao estornar transação')
       } finally {
         setIsLoading(false)
         setIsOpen(false)
       }
     }
   
-
   return (
     <>
       <button
@@ -42,7 +36,7 @@ export function RevertButton({
         Estornar
       </button>
 
-      {/* Modal de aviso da reversão*/}
+      {/* Modal aviso de segurança*/}
       {isOpen && (
         <div 
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
