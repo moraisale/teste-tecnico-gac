@@ -33,20 +33,20 @@ export const TransferForm = () => {
     defaultValues: { toEmail: '', amount: undefined },
   })
 
-  const onSubmit = async (values: TransferFormData) => {
-    try {
-      await transfer(values.toEmail, values.amount)
-      const successMsg = `Transferência de R$${values.amount.toFixed(2)} realizada com sucesso!`
-      toast.success(successMsg)
+    const onSubmit = async (values: TransferFormData) => {
+      const result = await transfer(values.toEmail, values.amount)
+
+      if (!result.success) {
+        toast.error(result.message ?? 'Erro desconhecido')
+        return
+      }
+
+      toast.success(
+        `Transferência realizada com sucesso!`
+      )
       reset()
       router.refresh()
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        const errorMsg = error.message || 'Erro ao realizar transferência'
-        toast.error(errorMsg)
-      }
     }
-  }
 
   return (
     <div className="w-full max-w-full bg-white rounded-2xl p-6 shadow-lg">
