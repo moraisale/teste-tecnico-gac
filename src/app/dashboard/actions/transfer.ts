@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth'
 import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { authOptions } from '@/lib/auth'
+import { Prisma } from '@prisma/client'
 
 export async function transfer(toEmail: string, amount: number) {
   const session = await getServerSession(authOptions)
@@ -20,7 +21,7 @@ export async function transfer(toEmail: string, amount: number) {
     throw new Error('Não pode transferir para si mesmo')
   }
 
-  return await prisma.$transaction(async (tx: any) => {
+  return await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
     // 1. Verifica saldo do remetente
     const fromUser = await tx.user.findUnique({
       where: { id: session.user.id },

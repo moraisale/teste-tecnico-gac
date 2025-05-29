@@ -2,6 +2,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
 import { prisma } from '@/lib/prisma'
 import { JWT } from 'next-auth/jwt'
+import { IUser } from '@/types/user'
 
 export const authOptions = {
   providers: [
@@ -47,7 +48,7 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 
   callbacks: {
-    async jwt({ token, user }: { token: JWT, user?: any }) {
+    async jwt({ token, user }: { token: JWT, user?: IUser }) {
       if (user) {
         token.id = user.id
         token.email = user.email

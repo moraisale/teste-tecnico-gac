@@ -3,6 +3,7 @@
 import { getServerSession } from 'next-auth'
 import { prisma } from '@/lib/prisma'
 import { authOptions } from '@/lib/auth'
+import { Prisma } from '@prisma/client'
 
 export async function deposit(amount: number) {
   const session = await getServerSession(authOptions)
@@ -16,8 +17,9 @@ export async function deposit(amount: number) {
   }
 
   try {
-    return await prisma.$transaction(async (tx: any) => {
+    return await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       // Atualiza saldo
+      console.log(tx)
       const user = await tx.user.update({
         where: { id: session.user.id },
         data: { balance: { increment: amount } },
@@ -35,7 +37,9 @@ export async function deposit(amount: number) {
 
       return user.balance
     })
-  } catch (error: any) {
-    throw new Error(error.message || 'Erro ao processar depósito')
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message || 'Erro ao processar depósito');
+    }
   }
 }

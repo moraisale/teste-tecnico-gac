@@ -6,7 +6,7 @@ export interface ITransaction {
   type: string;
   fromUserId: string | null;
   toUserId: string | null;
-  createdAt: string;
+  createdAt: Date;
   reversed: boolean;
   originalTransactionId: string | null;
   fromUser: IUser | null;

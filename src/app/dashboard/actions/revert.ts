@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth'
 import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { authOptions } from '@/lib/auth'
+import { Prisma } from '@prisma/client'
 
 export async function revertTransaction(transactionId: string) {
   const session = await getServerSession(authOptions)
@@ -12,7 +13,7 @@ export async function revertTransaction(transactionId: string) {
     throw new Error('Não autorizado')
   }
 
-  return await prisma.$transaction(async (tx: any) => {
+  return await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
     // 1. Busca a transação original
     const originalTransaction = await tx.transaction.findUnique({
       where: { id: transactionId },

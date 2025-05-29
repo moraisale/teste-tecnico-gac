@@ -40,9 +40,11 @@ export const TransferForm = () => {
       toast.success(successMsg)
       reset()
       router.refresh()
-    } catch (error: any) {
-      const errorMsg = error?.message || 'Erro ao realizar transferência'
-      toast.error(errorMsg)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        const errorMsg = error.message || 'Erro ao realizar transferência'
+        toast.error(errorMsg)
+      }
     }
   }
 

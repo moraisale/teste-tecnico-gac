@@ -18,8 +18,11 @@ export const RevertButton = ({ transactionId, disabled }: IRevertButtonProps) =>
         
         toast.success('Transação estornada com sucesso!')
         router.refresh()
-      } catch (error: any) {
-        toast.error(error?.message || 'Erro ao estornar transação')
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          const errorMsg = error.message || 'Erro ao estornar transação'
+          toast.error(errorMsg)
+        }
       } finally {
         setIsLoading(false)
         setIsOpen(false)

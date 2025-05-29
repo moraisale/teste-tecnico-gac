@@ -50,7 +50,7 @@ const LoginPage = () => {
       }
 
       router.push('/dashboard')
-    } catch (error) {
+    } catch (error: unknown) {
       toast.error('Ocorreu um erro inesperado')
     }
   }

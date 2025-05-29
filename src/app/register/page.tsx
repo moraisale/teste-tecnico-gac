@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast'
 import Link from 'next/link'
 import { mainClient } from '@/utils/client'
 import { MAIN_SERVICE_ROUTES } from '@/helpers/api'
+import { IErrorResponse } from '@/types/error'
 
 const registerSchema = z.object({
   name: z.string()
@@ -51,8 +52,10 @@ const RegisterPage = () => {
 
       toast.success('Cadastro realizado com sucesso!')
       router.push('/login')
-    } catch (error: any) {
-      toast.error(error.message || 'Erro ao cadastrar')
+    } catch (error: IErrorResponse | unknown) {
+      if ((error as IErrorResponse).message) {
+        toast.error((error as IErrorResponse).message)
+      }
     }
   }
 

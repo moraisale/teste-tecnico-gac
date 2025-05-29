@@ -1,25 +1,25 @@
 # Carteira Digital - Desafio para front-end Grupo Adriano Cobuccio
 
 Uma carteira digital com autenticação, depósitos, transferências e reversão de operações, desenvolvida com Next.js e TypeScript.
-Conteinerização feita com Docker e teste unitários/integração com Jest e React Testing Library
+
+Conteinerização feita com Docker e teste unitários com Jest e React Testing Library
 
 ## Funcionalidades Principais
 
-- **Autenticação Segura**
+- **Autenticação**
   - Cadastro e login com Next-Auth
   - Proteção de rotas com middleware
   - Session management
 
 - **Operações Financeiras**
   - Depósito com validação em tempo real
-  - Transferência entre usuários
+  - Transferência entre usuários cadastrados
   - Reversão de transações
   - Histórico de operações
 
 - **Validações**
   - Formulários com Zod e React Hook Form
   - Validações no cliente e servidor
-  - Tipagem forte com TypeScript
 
 ## Como Executar
 
@@ -89,7 +89,7 @@ A aplicação estará disponível em: [http://localhost:3000](http://localhost:3
 ### Padrões Adotados
 
 - SOLID
-  - Single Responsibility Principle
+  - Single Responsibility Principle (cada componente tem sua responsabilidade e cada action faz apenas 1 tarefa)
   - Open/Closed Principle
 - Server Actions para as operações financeiras
 - Componentização atômica

@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth'
 import { prisma } from '@/lib/prisma'
 import { authOptions } from '@/lib/auth';
 import { TransactionItem } from './TransactionItem';
+import { ITransaction } from '@/types/transactions';
 
 export const TransactionList = async () => {
   const session = await getServerSession(authOptions)
@@ -37,7 +38,7 @@ export const TransactionList = async () => {
         <p className="text-gray-500">Nenhuma transação encontrada</p>
       ) : (
         <ul className="space-y-4">
-          {transactions.map((transaction: any) => (
+          {transactions.map((transaction: ITransaction) => (
             <TransactionItem 
               key={transaction.id}
               transaction={transaction}

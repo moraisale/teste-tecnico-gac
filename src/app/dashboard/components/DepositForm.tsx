@@ -37,8 +37,11 @@ export const DepositForm = () => {
       toast.success('Depósito realizado com sucesso!')
       reset()
       router.refresh()
-    } catch (err: any) {
-      toast.error(err?.message || 'Erro ao realizar depósito')
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        const errorMsg = error.message || 'Erro ao realizar depósito'
+        toast.error(errorMsg)
+      }
     }
   }
 
