@@ -1,28 +1,28 @@
-import CredentialsProvider from 'next-auth/providers/credentials'
-import bcrypt from 'bcryptjs'
-import { prisma } from '@/lib/prisma'
-import { JWT } from 'next-auth/jwt'
-import { IUser } from '@/types/user'
+import { AuthOptions } from "next-auth"
+import CredentialsProvider from "next-auth/providers/credentials"
+import bcrypt from "bcryptjs"
+import { prisma } from "@/lib/prisma"
+import { IUser } from "@/types/user"
 
-export const authOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
+      name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Email e senha são obrigatórios')
+          throw new Error("Email e senha são obrigatórios")
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
+          where: { email: credentials.email },
         })
 
         if (!user) {
-          throw new Error('Usuário não encontrado')
+          throw new Error("Usuário não encontrado")
         }
 
         const isValidPassword = await bcrypt.compare(
@@ -31,37 +31,41 @@ export const authOptions = {
         )
 
         if (!isValidPassword) {
-          throw new Error('Senha incorreta')
+          throw new Error("Senha incorreta")
         }
 
         return {
-          id: user.id, 
+          id: user.id,
           email: user.email,
-          name: user.name
+          name: user.name,
         }
-      }
-    })
+      },
+    }),
   ],
   pages: {
-    signIn: '/login'
+    signIn: "/login",
   },
   secret: process.env.NEXTAUTH_SECRET,
 
   callbacks: {
-    async jwt({ token, user }: { token: JWT, user?: IUser }) {
+    async jwt({ token, user }) {
       if (user) {
-        token.id = user.id
-        token.email = user.email
-        token.name = user.name
+        const typedUser = user as IUser
+        token.id = typedUser.id
+        token.email = typedUser.email
+        token.name = typedUser.name
       }
       return token
     },
 
-    async session({ session, token }: { session: any, token: JWT }) {
+    async session({ session, token }) {
       if (token?.id) {
-        session.user.id = token.id
+        session.user = {
+          ...session.user,
+          id: token.id as string,
+        }
       }
       return session
     }
-  }
+  },
 }

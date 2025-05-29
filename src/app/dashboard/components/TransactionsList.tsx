@@ -43,7 +43,7 @@ export const TransactionList = async () => {
               key={transaction.id}
               transaction={transaction}
               currentUserId={session.user.id}
-              userName={session.user.name}
+              userName={session.user.name as string}
             />
           ))}
         </ul>
