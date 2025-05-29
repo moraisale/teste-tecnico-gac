@@ -89,7 +89,7 @@ export const TransferForm = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3 rounded-lg text-white font-semibold bg-[#002948] hover:bg-[#001d35] transition-colors disabled:opacity-70"
+          className="w-full py-3 rounded-lg cursor-pointer text-white font-semibold bg-[#002948] hover:bg-[#001d35] transition-colors disabled:opacity-70"
         >
           {isSubmitting ? (
             <span className="flex items-center justify-center gap-2">

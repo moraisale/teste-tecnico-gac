@@ -34,7 +34,7 @@ export const RevertButton = ({ transactionId, disabled }: IRevertButtonProps) =>
       <button
         onClick={() => setIsOpen(true)}
         disabled={disabled || isLoading}
-        className="text-red-600 hover:bg-red-50 px-3 py-1 rounded-md text-sm font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
+        className="text-red-600 hover:bg-red-50 cursor-pointer py-1 rounded-md text-sm font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Estornar
       </button>

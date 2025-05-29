@@ -46,7 +46,7 @@ export const TransactionItem = ({ transaction, currentUserId, userName }: ITrans
     transaction.type !== 'REVERSAL'
 
   return (
-    <li className="flex items-center gap-4 p-4 rounded-2xl shadow-sm hover:shadow-md transition ">
+    <li className="flex items-center gap-4 p-4 rounded-2xl shadow-sm hover:shadow-md transition bg-gray-50">
       <div className={`p-2 rounded-full ${iconBgClass}`}>
         {icon}
       </div>

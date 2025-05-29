@@ -19,7 +19,6 @@ export async function deposit(amount: number) {
   try {
     return await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       // Atualiza saldo
-      console.log(tx)
       const user = await tx.user.update({
         where: { id: session.user.id },
         data: { balance: { increment: amount } },
