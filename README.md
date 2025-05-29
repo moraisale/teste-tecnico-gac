@@ -1,6 +1,6 @@
-# Carteira Digital - Desafio para front-end Grupo Adriano Cobuccio
+# Carteira Digital – Desafio Técnico para Desenvolvedor Front-end | Grupo Adriano Cobuccio
 
-Uma carteira digital com autenticação, depósitos, transferências e reversão de operações, desenvolvida com Next.js e TypeScript.
+Aplicação de carteira digital com autenticação, operações financeiras (depósito, transferência, estorno) e histórico de transações – desenvolvida com Next.js 15, TypeScript e Prisma.
 
 Conteinerização feita com Docker e teste unitários com Jest e React Testing Library
 
